@@ -46,9 +46,18 @@ class ApiController extends AbstractController
     }
 
     #[Route('/api/about', name: 'app_api_about')]
-    public function getabout(): JsonResponse
+    public function getAbout(): JsonResponse
     {
         $response = $this->client->request('GET', 'http://localhost:1337/api/about?populate=*');
+        $content = $response->getContent();
+
+        return new JsonResponse(json_decode($content, true));
+    }
+
+    #[Route('/api/contact', name: 'app_api_contact')]
+    public function getContact(): JsonResponse
+    {
+        $response = $this->client->request('GET', 'http://localhost:1337/api/contact?populate=*');
         $content = $response->getContent();
 
         return new JsonResponse(json_decode($content, true));
