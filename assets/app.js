@@ -7,7 +7,9 @@
 import './styles/app.css';
 import home from './components/Home.vue';
 import projects from './components/Projects.vue';
+import about from './components/About.vue';
 import { createApp } from 'vue';
 
 createApp(home).mount('#home');
 createApp(projects).mount('#projects');
+createApp(about).mount('#about');
