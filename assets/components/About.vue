@@ -6,9 +6,9 @@
             <div class="about-text">
                 <p>{{ aboutData.description }}</p>
                 <div class="about-links">
-                    <a v-for="link in aboutData.about_url" :key="link.id" :href="link.url" target="_blank" class="about-link">
-                        {{ link.url }}
-                    </a>
+                    <button v-for="link in aboutData.about_url" :key="link.id" @click="openLink(link.url)" class="cta-button">
+                        {{ link.link_name }}
+                    </button>
                 </div>
             </div>
         </div>
@@ -44,6 +44,9 @@ export default {
                 .catch(error => {
                     console.error('There was a problem with the fetch operation:', error);
                 });
+        },
+        openLink(url) {
+            window.open(url, '_blank');
         }
     },
     mounted() {
@@ -90,15 +93,21 @@ export default {
     margin-top: 20px;
 }
 
-.about-link {
-    display: block;
-    color: #007bff;
+.cta-button {
+    display: inline-block;
+    margin: 10px 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     text-decoration: none;
-    margin-bottom: 10px;
 }
 
-.about-link:hover {
-    text-decoration: underline;
+.cta-button:hover {
+    background-color: #0056b3;
 }
 
 .loading {

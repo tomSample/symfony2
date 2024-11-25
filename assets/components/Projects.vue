@@ -1,14 +1,12 @@
 <template>
     <div class="projects">
-        <h1>Mes Projets</h1>
+        <h1>Projets</h1>
         <div v-if="projectsData" class="projects-list">
-            <div v-for="project in projectsData" :key="project.documentId" class="project-card">
-                <a :href="`/projects/${project.documentId}.html`">
-                    <img :src="getFullImageUrl(project.media.url)" :alt="project.media.alternativeText || 'Project Image'" class="project-image" />
-                    <h2>{{ project.name }}</h2>
-                    <p>{{ project.description }}</p>
-                </a>
-            </div>
+            <a v-for="project in projectsData" :key="project.documentId" :href="`/projects/${project.documentId}.html`" class="project-card">
+                <img :src="getFullImageUrl(project.media.url)" :alt="project.media.alternativeText || 'Project Image'" class="project-image" />
+                <h2>{{ project.name }}</h2>
+                <p>{{ project.description }}</p>
+            </a>
         </div>
         <div v-else class="loading">
             Loading...
@@ -88,6 +86,7 @@ h1 {
 
 .project-card:hover {
     transform: translateY(-10px);
+    background-color: #cce3fc;
 }
 
 .project-image {

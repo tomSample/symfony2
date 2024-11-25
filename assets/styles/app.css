@@ -19,13 +19,23 @@ header {
     padding: 20px 0; /* Increased padding for larger navbar */
 }
 
+header a {
+    color : #ffffff;
+    text-decoration: none;
+}
+
+header a:hover {
+    color : #ffffff;
+    text-decoration: underline;
+}
+
 .navbar {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
     justify-content: center;
+    color : #ffffff;
 }
-
 .navbar-list {
     list-style: none;
     padding: 0;
@@ -38,15 +48,20 @@ header {
 }
 
 .navbar-link {
-    color: #fff;
     text-decoration: none;
     font-size: 1.5em; /* Increased font size */
-    transition: color 0.3s ease, transform 0.3s ease; /* Added transform transition */
 }
 
 .navbar-link:hover {
-    color: #ddd;
-    transform: scale(1.1); /* Scale effect on hover */
+    text-decoration: underline;
+}
+
+.footer-link {
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
 }
 
 /* Main Content */
@@ -54,6 +69,12 @@ main {
     flex: 1;
     padding: 20px; /* Added padding for main content */
 }
+
+main a {
+    color : #000000;
+    text-decoration: none;
+}
+
 
 /* Footer */
 footer {
@@ -66,6 +87,14 @@ footer {
     width: 100%;
 }
 
+footer a {
+    color: #fff;
+}
+
+footer a:hover {
+    color : #ffffff;
+    text-decoration: underline;
+}
 
 /* ================= */
 

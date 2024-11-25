@@ -11,7 +11,8 @@
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
 </head>
-<body>
+
+    {% block header %}
     <header>
         <nav class="navbar">
             <ul class="navbar-list">
@@ -22,37 +23,16 @@
             </ul>
         </nav>
     </header>
+    {% endblock %}
 
     <main id="main-content">
         {% block body %}{% endblock %}
     </main>
 
     <footer>
-        <p>&copy; 2024 Mon Portfolio</p>
+        <p>&copy; 2024 - Thomas Grandjean - Technologies : Strapi / Symfony / Vue.js</p>
+        <p><a class="footer-link" href="mailto:thomasgrandjean45@gmail.com" target ="_blank">Contactez moi par mail</a></p>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const links = document.querySelectorAll('.navbar-link');
-            const mainContent = document.getElementById('main-content');
-
-            links.forEach(link => {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const url = this.getAttribute('href');
-
-                    mainContent.classList.add('fade-leave-active');
-                    setTimeout(() => {
-                        window.location.href = url;
-                    }, 500); // Duration of the fade-out transition
-                });
-            });
-
-            mainContent.classList.add('fade-enter');
-            setTimeout(() => {
-                mainContent.classList.remove('fade-enter');
-            }, 500); // Duration of the fade-in transition
-        });
-    </script>
 </body>
 </html>
