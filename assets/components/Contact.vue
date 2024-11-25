@@ -1,102 +1,120 @@
 <template>
-    <div class="contact-form">
-        <h1>Contact</h1>
-        <form @submit.prevent="submitForm">
-            <div>
-                <label for="your_name">Name:</label>
-                <input type="text" v-model="form.your_name" id="your_name" required />
+    <div class="contact">
+        <h1>Contactez-nous</h1>
+        <form @submit.prevent="submitForm" class="contact-form">
+            <div class="form-group">
+                <label for="name">Nom</label>
+                <input type="text" id="name" v-model="form.name" required />
             </div>
-            <div>
-                <label for="your_email">Email:</label>
-                <input type="email" v-model="form.your_email" id="your_email" required />
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" v-model="form.email" required />
             </div>
-            <div>
-                <label for="your_message">Message:</label>
-                <textarea v-model="form.your_message" id="your_message" required></textarea>
+            <div class="form-group">
+                <label for="subject">Sujet</label>
+                <input type="text" id="subject" v-model="form.subject" required />
             </div>
-            <button type="submit">Send</button>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" v-model="form.message" required></textarea>
+            </div>
+            <button type="submit" class="submit-button">Envoyer</button>
         </form>
-        <div v-if="response">
-            <h2>Response</h2>
-            <pre>{{ response }}</pre>
-        </div>
     </div>
 </template>
 
 <script>
+import emailjs from 'emailjs-com';
+
 export default {
     data() {
         return {
             form: {
-                your_name: '',
-                your_email: '',
-                your_message: '',
-            },
-            response: null,
+                name: '',
+                email: '',
+                subject: '',
+                message: ''
+            }
         };
     },
     methods: {
-        async submitForm() {
-            try {
-                const response = await fetch('http://localhost:1337/api/contacts', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ data: this.form }),
+        submitForm() {
+            const serviceID = 'service_hw97a5k';
+            const templateID = 'template_v5pezdl';
+            const userID = 'sjE15GMtyAGd_ekAh';
+
+            const templateParams = {
+                name: this.form.name,
+                email: this.form.email,
+                subject: this.form.subject,
+                message: this.form.message
+            };
+
+            emailjs.send(serviceID, templateID, templateParams, userID)
+                .then(response => {
+                    console.log('Success:', response.status, response.text);
+                    alert('Message envoyé avec succès!');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Erreur lors de l\'envoi du message.');
                 });
-                const result = await response.json();
-                this.response = result;
-                if (response.ok) {
-                    alert('Message sent successfully!');
-                    this.form = {
-                        your_name: '',
-                        your_email: '',
-                        your_message: '',
-                    };
-                } else {
-                    alert('Failed to send message.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('An error occurred while sending the message.');
-            }
-        },
-    },
+        }
+    }
 };
 </script>
 
 <style scoped>
-.contact-form {
+.contact {
     max-width: 600px;
     margin: 0 auto;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.contact-form div {
+
+.contact h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
     margin-bottom: 1rem;
 }
+
 .contact-form label {
     display: block;
     margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #333;
 }
+
 .contact-form input,
 .contact-form textarea {
     width: 100%;
     padding: 0.5rem;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 4px;
 }
-.contact-form button {
-    padding: 0.5rem 1rem;
-    background-color: #007bff;
-    color: white;
+
+.submit-button {
+    padding: 0.75rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1rem;
     cursor: pointer;
 }
-.contact-form button:hover {
+
+.submit-button:hover {
     background-color: #0056b3;
 }
 </style>
