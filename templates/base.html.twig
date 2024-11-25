@@ -5,6 +5,7 @@
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {% endblock %}
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
@@ -22,12 +23,36 @@
         </nav>
     </header>
 
-    <main>
+    <main id="main-content">
         {% block body %}{% endblock %}
     </main>
 
     <footer>
         <p>&copy; 2024 Mon Portfolio</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('.navbar-link');
+            const mainContent = document.getElementById('main-content');
+
+            links.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const url = this.getAttribute('href');
+
+                    mainContent.classList.add('fade-leave-active');
+                    setTimeout(() => {
+                        window.location.href = url;
+                    }, 500); // Duration of the fade-out transition
+                });
+            });
+
+            mainContent.classList.add('fade-enter');
+            setTimeout(() => {
+                mainContent.classList.remove('fade-enter');
+            }, 500); // Duration of the fade-in transition
+        });
+    </script>
 </body>
 </html>

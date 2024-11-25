@@ -1,19 +1,19 @@
 <template>
-    <div>
-        <div v-if="loading">
+    <div class="project-details">
+        <div v-if="loading" class="loading">
             Loading...
         </div>
-        <div v-else-if="error">
+        <div v-else-if="error" class="error">
             Error loading project details.
         </div>
         <div v-else>
-            <h1>{{ project.name }}</h1>
-            <p>{{ project.description }}</p>
-            <p><strong>Date:</strong> {{ project.date }}</p>
-            <div v-if="project.media">
+            <div v-if="project.media" class="project-media">
                 <h2>Media</h2>
-                <img :src="getFullImageUrl(project.media.url)" :alt="project.media.alternativeText || 'Project Image'" />
+                <img :src="getFullImageUrl(project.media.url)" :alt="project.media.alternativeText || 'Project Image'" class="project-image" />
             </div>
+            <h1 class="project-title">{{ project.name }}</h1>
+            <p class="project-description">{{ project.description }}</p>
+            <p class="project-date"><strong>Date:</strong> {{ project.date }}</p>
         </div>
     </div>
 </template>
@@ -59,5 +59,46 @@ export default {
 </script>
 
 <style scoped>
-/* Add your styles here */
+.project-details {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.loading, .error {
+    text-align: center;
+    font-size: 1.2em;
+    color: #ff0000;
+}
+
+.project-title {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.project-description {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.project-date {
+    font-size: 1em;
+    margin-bottom: 20px;
+    color: #999;
+}
+
+.project-media {
+    margin-top: 20px;
+}
+
+.project-image {
+    width: 800px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 </style>

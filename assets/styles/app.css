@@ -1,14 +1,22 @@
-body {
+/* Global Styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
     background-color: #ffffff;
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
+body {
+    flex: 1;
+}
+
+/* Header and Navbar */
 header {
     background-color: #333;
-    padding: 10px 0;
+    padding: 20px 0; /* Increased padding for larger navbar */
 }
 
 .navbar {
@@ -26,23 +34,46 @@ header {
 }
 
 .navbar-item {
-    margin: 0 15px;
+    margin: 0 20px; /* Increased margin for spacing */
 }
 
 .navbar-link {
     color: #fff;
     text-decoration: none;
-    font-size: 1.2em;
-    transition: color 0.3s ease;
+    font-size: 1.5em; /* Increased font size */
+    transition: color 0.3s ease, transform 0.3s ease; /* Added transform transition */
 }
 
 .navbar-link:hover {
     color: #ddd;
+    transform: scale(1.1); /* Scale effect on hover */
 }
 
+/* Main Content */
+main {
+    flex: 1;
+    padding: 20px; /* Added padding for main content */
+}
+
+/* Footer */
 footer {
     text-align: center;
-    padding: 20px 0;
+    padding: 20px;
     background-color: #333;
     color: #fff;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+
+/* ================= */
+
+
+/* Transitions */
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+    opacity: 0;
 }
