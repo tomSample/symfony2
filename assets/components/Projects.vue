@@ -2,10 +2,12 @@
     <div class="projects">
         <h1>Mes Projets</h1>
         <div v-if="projectsData" class="projects-list">
-            <div v-for="project in projectsData" :key="project.id" class="project-card">
-                <img :src="getFullImageUrl(project.media.url)" :alt="project.media.alternativeText || 'Project Image'" class="project-image" />
-                <h2>{{ project.name }}</h2>
-                <p>{{ project.description }}</p>
+            <div v-for="project in projectsData" :key="project.documentId" class="project-card">
+                <a :href="`/projects/${project.documentId}.html`">
+                    <img :src="getFullImageUrl(project.media.url)" :alt="project.media.alternativeText || 'Project Image'" class="project-image" />
+                    <h2>{{ project.name }}</h2>
+                    <p>{{ project.description }}</p>
+                </a>
             </div>
         </div>
         <div v-else class="loading">
@@ -34,16 +36,16 @@ export default {
                     return response.json();
                 })
                 .then(data => {
-                    this.projectsData = data.data; // Accéder directement à l'objet data
+                    this.projectsData = data.data;
                 })
                 .catch(error => {
                     console.error('There was a problem with the fetch operation:', error);
                 });
         }
     },
-    mounted() {
+    created() {
         this.fetchProjectsData();
-    },
+    }
 };
 </script>
 

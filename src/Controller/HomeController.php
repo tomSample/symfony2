@@ -24,6 +24,15 @@ class HomeController extends AbstractController
         ]);
     }
 
+    #[Route('/projects/{id}', name: 'app_projects_docId')]
+    public function projects_docId($id): Response
+    {
+        return $this->render('projects/details.html.twig', [
+            'controller_name' => 'HomeController',
+            'id' => $id
+        ]);
+    }
+
     #[Route('/about', name: 'app_about')]
     public function about(): Response
     {

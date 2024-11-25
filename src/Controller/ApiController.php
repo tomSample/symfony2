@@ -45,6 +45,16 @@ class ApiController extends AbstractController
         return new JsonResponse(json_decode($content, true));
     }
 
+    #[Route('/api/projects/{documentId}', name: 'app_api_projects_docId')]
+    public function getProjects_docId($documentId): JsonResponse
+    {
+        $response = $this->client->request('GET', "http://localhost:1337/api/projects/{$documentId}?populate=*");
+        $content = $response->toArray();
+    
+        return new JsonResponse($content);
+    }
+
+
     #[Route('/api/about', name: 'app_api_about')]
     public function getAbout(): JsonResponse
     {
